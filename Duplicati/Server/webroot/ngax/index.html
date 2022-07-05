@@ -247,9 +247,11 @@
                             id="settings" translate>Settings</a>
 
                     </li>
-
                     <li>
                         <a href="#/about" id="about" class="about" ng-class="{active: current_page == 'about'}" translate>About</a>
+                    </li>
+                    <li>
+                        <a href="#/log" id="log" class="logpage" ng-class="{active: current_page == 'log'}" translate>Log</a>
                     </li>
                     <li ng-show="isLoggedIn">
                         <a href ng-click="log_out()" class="logout" translate>Log out</a>

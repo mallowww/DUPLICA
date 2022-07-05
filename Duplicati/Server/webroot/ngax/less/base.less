@@ -882,7 +882,8 @@ body {
             padding-bottom: 70px;
 
             a {
-                color: @lColor;
+                // color: @lColor;
+                color: #2A505A;
             }
 
             .mainmenu {
@@ -1029,6 +1030,23 @@ body {
                             }
                         }
 
+                        >a.logpage {
+                            background: url('../img/mainmenu/log.png') no-repeat 8px 7px;
+                            background-size: 27px 26px;
+
+                            @media only screen and (-webkit-min-device-pixel-ratio: 1.25),
+                            only screen and (min-resolution: 192dpi),
+                            only screen and (min-resolution: 1.25dppx) {
+                                background-image: url('../img/mainmenu/log.png');
+                            }
+
+                            @media only screen and (-webkit-min-device-pixel-ratio: 2.25),
+                            only screen and (min-resolution: 288dpi),
+                            only screen and (min-resolution: 2.25dppx) {
+                                background-image: url('../img/mainmenu/log.png');
+                            }
+                        }
+
                         >a.home.active {
                             background: lighten(@lColor, 15%) url('../img/mainmenu/over/home.png') no-repeat 8px 7px;
                             background-size: 27px 26px;
@@ -1128,6 +1146,41 @@ body {
                             only screen and (min-resolution: 288dpi),
                             only screen and (min-resolution: 2.25dppx) {
                                 background-image: url('../img/mainmenu/over/about_3x.png');
+                            }
+                        }
+
+
+                        >a.logpage.active {
+                            background: url('../img/mainmenu/log.png') no-repeat 8px 7px;
+                            background-size: 27px 26px;
+
+                            @media only screen and (-webkit-min-device-pixel-ratio: 1.25),
+                            only screen and (min-resolution: 192dpi),
+                            only screen and (min-resolution: 1.25dppx) {
+                                background-image: url('../img/mainmenu/over/log.png');
+                            }
+
+                            @media only screen and (-webkit-min-device-pixel-ratio: 2.25),
+                            only screen and (min-resolution: 288dpi),
+                            only screen and (min-resolution: 2.25dppx) {
+                                background-image: url('../img/mainmenu/over/log.png');
+                            }
+                        }
+
+                        >a.logpage:hover {
+                            background: url('../img/mainmenu/logo.png') no-repeat 8px 7px;
+                            background-size: 27px 26px;
+
+                            @media only screen and (-webkit-min-device-pixel-ratio: 1.25),
+                            only screen and (min-resolution: 192dpi),
+                            only screen and (min-resolution: 1.25dppx) {
+                                background-image: url('../img/mainmenu/over/log.png');
+                            }
+
+                            @media only screen and (-webkit-min-device-pixel-ratio: 2.25),
+                            only screen and (min-resolution: 288dpi),
+                            only screen and (min-resolution: 2.25dppx) {
+                                background-image: url('../img/mainmenu/over/log.png');
                             }
                         }
 
