@@ -3445,7 +3445,7 @@ body .container {
 }
 
 body .container .header {
-    line-height: 70px; 
+    line-height: 70px;
     background: #eceff1;
     overflow: hidden;
     height: 100px;
@@ -3764,7 +3764,7 @@ body .container .body a {
 
 body .container .body .mainmenu {
     background-color: #eceff1 !important;
-    width: 250px;
+    width: 270px;
     height: 100%;
     top: 100px;
     /* border-right: 1px solid black; */
@@ -3967,7 +3967,7 @@ only screen and (min-resolution:2.25dppx) {
 }
 
 body .container .body .mainmenu>ul>li>a.add.active {
-    background: #68bbeb    url('../img/mainmenu/over/add.png') no-repeat 8px 7px;
+    background: #68bbeb url('../img/mainmenu/over/add.png') no-repeat 8px 7px;
     background-size: 27px 26px
 }
 
@@ -3988,7 +3988,7 @@ only screen and (min-resolution:2.25dppx) {
 }
 
 body .container .body .mainmenu>ul>li>a.restore.active {
-    background: #68bbeb    url('../img/mainmenu/over/restore.png') no-repeat 8px 7px;
+    background: #68bbeb url('../img/mainmenu/over/restore.png') no-repeat 8px 7px;
     background-size: 27px 26px
 }
 
@@ -4009,7 +4009,7 @@ only screen and (min-resolution:2.25dppx) {
 }
 
 body .container .body .mainmenu>ul>li>a.resume.active {
-    background: #68bbeb    url('../img/mainmenu/over/resume.png') no-repeat 8px 7px;
+    background: #68bbeb url('../img/mainmenu/over/resume.png') no-repeat 8px 7px;
     background-size: 27px 26px
 }
 
@@ -4030,7 +4030,22 @@ only screen and (min-resolution:2.25dppx) {
 }
 
 body .container .body .mainmenu>ul>li>a.settings.active {
-    background: #68bbeb    url('../img/mainmenu/over/settings.png') no-repeat 8px 7px;
+    background: #68bbeb url('../img/mainmenu/over/settings.png') no-repeat 8px 7px;
+    background-size: 27px 26px
+}
+
+body .container .body .mainmenu>ul>li>a.logpage.active {
+    background: #68bbeb url('../img/mainmenu/over/log.png') no-repeat 8px 7px;
+    background-size: 27px 26px
+}
+
+body .container .body .mainmenu>ul>li>a.logpage:hover {
+    background: #4ca4d7 url('../img/mainmenu/over/log.png') no-repeat 8px 7px;
+    background-size: 27px 26px
+}
+
+body .container .body .mainmenu>ul>li>a.logpage {
+    background: url('../img/mainmenu/over/log.png') no-repeat 8px 7px;
     background-size: 27px 26px
 }
 
@@ -4051,7 +4066,7 @@ only screen and (min-resolution:2.25dppx) {
 }
 
 body .container .body .mainmenu>ul>li>a.about.active {
-    background: #68bbeb    url('../img/mainmenu/over/about.png') no-repeat 8px 7px;
+    background: #68bbeb url('../img/mainmenu/over/about.png') no-repeat 8px 7px;
     background-size: 27px 26px
 }
 
@@ -4264,7 +4279,7 @@ body .container .body .contextmenu.open {
 
 body .container .body .content {
     float: left;
-    padding-left: 350px;
+    padding-left: 370px;
     padding-bottom: 50px;
     max-width: 70%;
     padding-top: 70px;
