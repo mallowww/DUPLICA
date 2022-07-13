@@ -2323,11 +2323,11 @@ msgstr "แสดงโฟลเดอร์ที่ซ่อนอยู่"
 
 #: templates/about.html:8
 msgid "Show log"
-msgstr ""
+msgstr "แสดงบันทึกการเปลี่ยนแปลง"
 
 #: templates/home.html:47
 msgid "Show log …"
-msgstr ""
+msgstr "แสดงบันทึกการเปลี่ยนแปลง …"
 
 #: templates/addoredit.html:135
 msgid "Show treeview"
