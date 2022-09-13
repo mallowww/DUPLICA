@@ -157,7 +157,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 var passphrase = info.Request.QueryString["passphrase"].Value;
                 byte[] data = Backup.ExportToJSON(backup, passphrase);
 
-                string filename = Library.Utility.Uri.UrlEncode(backup.Name) + "-duplicati-config.json";
+                string filename = Library.Utility.Uri.UrlEncode(backup.Name) + "-arak-config.json";
                 if (!string.IsNullOrWhiteSpace(passphrase))
                 {
                     filename += ".aes";

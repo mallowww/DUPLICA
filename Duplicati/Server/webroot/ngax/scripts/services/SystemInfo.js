@@ -47,7 +47,8 @@ backupApp.service('SystemInfo', function ($rootScope, $timeout, $cookies, AppSer
                 'ssh': null,
                 'webdav': null,
                 'openstack': gettextCatalog.getString('OpenStack Object Storage / Swift'),
-                's3': gettextCatalog.getString('S3 Compatible'),
+                's3': gettextCatalog.getString('S3 Fileman'),
+                's3fileman': gettextCatalog.getString('S3 Fileman'),
                 'aftp': gettextCatalog.getString('FTP (Alternative)')
             },
             local: { 'file': null },
@@ -73,7 +74,6 @@ backupApp.service('SystemInfo', function ($rootScope, $timeout, $cookies, AppSer
                 'storj': null,
                 'tardigrade': null,
                 'jottacloud': null,
-                'Arak Cloud': null,
                 'rclone': null,
                 'cos': null
             }

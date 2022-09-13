@@ -240,10 +240,10 @@ namespace Duplicati.Server
 
                 ApplicationExitEvent = new System.Threading.ManualResetEvent(false);
 
-                Library.AutoUpdater.UpdaterManager.OnError += (Exception obj) =>
-                {
-                    DataConnection.LogError(null, "Error in updater", obj);
-                };
+                // Library.AutoUpdater.UpdaterManager.OnError += (Exception obj) =>
+                // {
+                //     DataConnection.LogError(null, "Error in updater", obj);
+                // };
                 
                 UpdatePoller = new UpdatePollThread();
 

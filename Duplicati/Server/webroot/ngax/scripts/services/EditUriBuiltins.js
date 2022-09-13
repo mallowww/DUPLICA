@@ -14,6 +14,7 @@ backupApp.service('EditUriBuiltins', function (AppService, AppUtils, SystemInfo,
     // All backends with a custom UI must register here
     EditUriBackendConfig.templates['file'] = 'templates/backends/file.html';
     EditUriBackendConfig.templates['s3'] = 'templates/backends/s3.html';
+    EditUriBackendConfig.templates['s3fileman'] = 'templates/backends/s3fileman.html';
     EditUriBackendConfig.templates['googledrive'] = 'templates/backends/oauth.html';
     // EditUriBackendConfig.templates['hubic']       = 'templates/backends/oauth.html';
     EditUriBackendConfig.templates['onedrive'] = 'templates/backends/oauth.html';
@@ -157,6 +158,129 @@ backupApp.service('EditUriBuiltins', function (AppService, AppUtils, SystemInfo,
         scope.s3_client_options = s3_client_options;
     };
 
+    // s3fileman-wip
+    EditUriBackendConfig.testers['s3fileman'] = function (scope, callback) {
+
+        if (scope.s3_server != 's3.amazonaws.com') {
+            callback();
+            return;
+        }
+
+        var dlg = null;
+
+        dlg = DialogService.dialog(gettextCatalog.getString('Testing permissions...'), gettextCatalog.getString('Testing permissions …'), [], null, function () {
+            AppService.post('/webmodule/s3-iamconfig', {
+                's3-operation': 'CanCreateUser',
+                's3-username': scope.Username,
+                's3-password': scope.Password
+            }).then(function (data) {
+                dlg.dismiss();
+
+                if (data.data.Result.isroot == 'True') {
+                    DialogService.dialog(gettextCatalog.getString('User has too many permissions'), gettextCatalog.getString('The user has too many permissions. Do you want to create a new limited user, with only permissions to the selected path?'), [gettextCatalog.getString('Cancel'), gettextCatalog.getString('No'), gettextCatalog.getString('Yes')], function (ix) {
+                        if (ix == 0 || ix == 1) {
+                            callback();
+                        } else {
+                            scope.s3_directCreateIAMUser(function () {
+                                scope.s3_bucket_check_name = scope.Server;
+                                scope.s3_bucket_check_user = scope.Username;
+
+                                callback();
+                            });
+                        }
+                    });
+                } else {
+                    callback();
+                }
+            }, function (data) {
+                dlg.dismiss();
+                AppUtils.connectionError(data);
+            });
+        });
+    }
+
+    EditUriBackendConfig.loaders['s3fileman'] = function (scope) {
+        if (scope.s3_providers == null) {
+            AppService.post('/webmodule/s3-getconfig', { 's3-config': 'Providers' }).then(function (data) {
+                scope.s3_providers = data.data.Result;
+                if (scope.s3_server == undefined && scope.s3_server_custom == undefined)
+                    scope.s3_server = 's3.amazonaws.com';
+
+            }, AppUtils.connectionError);
+        } else {
+            if (scope.s3_server == undefined && scope.s3_server_custom == undefined)
+                scope.s3_server = 's3.amazonaws.com';
+        }
+
+        if (scope.s3_regions == null) {
+            AppService.post('/webmodule/s3-getconfig', { 's3-config': 'Regions' }).then(function (data) {
+                scope.s3_regions = data.data.Result;
+                if (scope.s3_region == null && scope.s3_region_custom == undefined)
+                    scope.s3_region = '';
+            }, AppUtils.connectionError);
+        } else {
+            if (scope.s3_region == null && scope.s3_region_custom == undefined)
+                scope.s3_region = '';
+        }
+
+        if (scope.s3_storageclasses == null) {
+            AppService.post('/webmodule/s3-getconfig', { 's3-config': 'StorageClasses' }).then(function (data) {
+                scope.s3_storageclasses = data.data.Result;
+                if (scope.s3_storageclass == null && scope.s3_storageclass_custom == undefined)
+                    scope.s3_storageclass = '';
+            }, AppUtils.connectionError);
+        } else {
+            if (scope.s3_storageclass == null && scope.s3_storageclass_custom == undefined)
+                scope.s3_storageclass = '';
+        }
+
+        scope.s3_bucket_check_name = null;
+        scope.s3_bucket_check_user = null;
+
+        scope.s3_directCreateIAMUser = function (callback) {
+
+            var dlg = null;
+
+            dlg = DialogService.dialog(gettextCatalog.getString('Creating user...'), gettextCatalog.getString('Creating new user with limited access …'), [], null, function () {
+                path = (scope.Server || '') + '/' + (scope.Path || '');
+
+                AppService.post('/webmodule/s3-iamconfig', {
+                    's3-operation': 'CreateIAMUser',
+                    's3-path': path,
+                    's3-username': scope.Username,
+                    's3-password': scope.Password
+                }).then(function (data) {
+                    dlg.dismiss();
+
+                    scope.Username = data.data.Result.accessid;
+                    scope.Password = data.data.Result.secretkey;
+
+                    DialogService.dialog(gettextCatalog.getString('Created new limited user'), gettextCatalog.getString('New user name is {{user}}.\nUpdated credentials to use the new limited user', { user: data.data.Result.username }), [gettextCatalog.getString('OK')], callback);
+
+                }, function (data) {
+                    dlg.dismiss();
+                    AppUtils.connectionError(data);
+                });
+            });
+        };
+
+        scope.s3_createIAMPolicy = function () {
+            EditUriBackendConfig.validaters['s3fileman'](scope, function () {
+                path = (scope.Server || '') + '/' + (scope.Path || '');
+
+                AppService.post('/webmodule/s3-iamconfig', {
+                    's3-operation': 'GetPolicyDoc',
+                    's3-path': path
+                }).then(function (data) {
+                    DialogService.dialog(gettextCatalog.getString('AWS IAM Policy'), data.data.Result.doc);
+                }, AppUtils.connectionError);
+            });
+        };
+
+        scope.s3_client = s3_client_options[0];
+        scope.s3_client_options = s3_client_options;
+    };
+    // 
     EditUriBackendConfig.loaders['storj'] = function (scope) {
         if (scope.storj_satellites == null) {
             AppService.post('/webmodule/storj-getconfig', { 'storj-config': 'Satellites' }).then(function (data) {
