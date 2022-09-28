@@ -42,20 +42,25 @@ namespace Duplicati.Library.Backend
         private const string SSL_OPTION = "use-ssl";
         private const string S3_CLIENT_OPTION = "s3-client";
 
+        /*
+                public static readonly Dictionary<string, string> KNOWN_S3_PROVIDERS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
+                    { "Amazon S3", "s3.amazonaws.com" },
+                    { "MyCloudyPlace (EU)", "s3.mycloudyplace.com" },
+                    { "Hosteurope", "cs.hosteurope.de" },
+                    { "Dunkel", "dcs.dunkel.de" },
+                    { "DreamHost", "objects.dreamhost.com" },
+                    { "dinCloud - Chicago", "d3-ord.dincloud.com" },
+                    { "dinCloud - Los Angeles", "d3-lax.dincloud.com" },
+                    { "Poli Systems (CH)", "s3.polisystems.ch" },
+                    { "IBM COS (S3) Public US", "s3-api.us-geo.objectstorage.softlayer.net" },
+                    { "Storadera", "eu-east-1.s3.storadera.com" },
+                    { "Wasabi Hot Storage", "s3.wasabisys.com" },
+                    { "Wasabi Hot Storage (US West)", "s3.us-west-1.wasabisys.com" },
+                    { "Wasabi Hot Storage (EU Central)", "s3.eu-central-1.wasabisys.com" },
+                };
+                */
+
         public static readonly Dictionary<string, string> KNOWN_S3_PROVIDERS = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
-            { "Amazon S3", "s3.amazonaws.com" },
-            { "MyCloudyPlace (EU)", "s3.mycloudyplace.com" },
-            { "Hosteurope", "cs.hosteurope.de" },
-            { "Dunkel", "dcs.dunkel.de" },
-            { "DreamHost", "objects.dreamhost.com" },
-            { "dinCloud - Chicago", "d3-ord.dincloud.com" },
-            { "dinCloud - Los Angeles", "d3-lax.dincloud.com" },
-            { "Poli Systems (CH)", "s3.polisystems.ch" },
-            { "IBM COS (S3) Public US", "s3-api.us-geo.objectstorage.softlayer.net" },
-            { "Storadera", "eu-east-1.s3.storadera.com" },
-            { "Wasabi Hot Storage", "s3.wasabisys.com" },
-            { "Wasabi Hot Storage (US West)", "s3.us-west-1.wasabisys.com" },
-            { "Wasabi Hot Storage (EU Central)", "s3.eu-central-1.wasabisys.com" },
         };
 
         //Updated list: http://docs.amazonwebservices.com/general/latest/gr/rande.html#s3_region
@@ -347,6 +352,11 @@ namespace Duplicati.Library.Backend
             using (FileStream fs = File.Open(localname, FileMode.Open, FileAccess.Read, FileShare.Read))
                 await PutAsync(remotename, fs, cancelToken);
         }
+
+        // public async Task PutAsync(string remotename, Stream input, CancellationToken cancelToken)
+        // {
+        //     await Connection.AddFileStreamAsync(m_bucket, GetFullKey(remotename), input, cancelToken);
+        // }
 
         public async Task PutAsync(string remotename, Stream input, CancellationToken cancelToken)
         {

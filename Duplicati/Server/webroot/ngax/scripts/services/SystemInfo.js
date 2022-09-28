@@ -48,12 +48,13 @@ backupApp.service('SystemInfo', function ($rootScope, $timeout, $cookies, AppSer
                 'webdav': null,
                 'openstack': gettextCatalog.getString('OpenStack Object Storage / Swift'),
                 's3': gettextCatalog.getString('S3 Fileman'),
-                's3fileman': gettextCatalog.getString('S3 Fileman'),
+                's3fileman': gettextCatalog.getString('s3 Fileman'),
                 'aftp': gettextCatalog.getString('FTP (Alternative)')
             },
             local: { 'file': null },
             prop: {
                 's3': null,
+                's3fileman': null,
                 'azure': null,
                 'googledrive': null,
                 'onedrive': null,

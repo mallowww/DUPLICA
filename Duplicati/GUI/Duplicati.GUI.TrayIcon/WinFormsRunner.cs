@@ -118,7 +118,7 @@ namespace Duplicati.GUI.TrayIcon.Windows
             m_trayIcon.DoubleClick += new EventHandler(m_trayIcon_DoubleClick);
             m_trayIcon.Click += new EventHandler(m_trayIcon_Click);
             m_trayIcon.BalloonTipClicked += m_BalloonTipClicked;
-            m_trayIcon.Text = "Arak";     
+            m_trayIcon.Text = "Data Protection with PDPA Thailand Law";     
             base.Init(args);
         }
         

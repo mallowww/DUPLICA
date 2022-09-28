@@ -159,6 +159,7 @@ backupApp.service('EditUriBuiltins', function (AppService, AppUtils, SystemInfo,
     };
 
     // s3fileman-wip
+    /*
     EditUriBackendConfig.testers['s3fileman'] = function (scope, callback) {
 
         if (scope.s3_server != 's3.amazonaws.com') {
@@ -280,6 +281,7 @@ backupApp.service('EditUriBuiltins', function (AppService, AppUtils, SystemInfo,
         scope.s3_client = s3_client_options[0];
         scope.s3_client_options = s3_client_options;
     };
+    */
     // 
     EditUriBackendConfig.loaders['storj'] = function (scope) {
         if (scope.storj_satellites == null) {
@@ -538,7 +540,12 @@ backupApp.service('EditUriBuiltins', function (AppService, AppUtils, SystemInfo,
 
         EditUriBackendConfig.mergeServerAndPath(scope);
     };
-
+// oauth s3 fileman
+// EditUriBackendConfig.params['s3fileman'] = () => {
+//     scope.s3fileman = storj_api_key[{test1, test2}]
+// }
+    EditUriBackendConfig.parsers['s3fileman'] = function () { return this['oauth-base'].apply(this, arguments); };
+//    
     EditUriBackendConfig.parsers['googledrive'] = function () { return this['oauth-base'].apply(this, arguments); };
     EditUriBackendConfig.parsers['hubic'] = function () { return this['oauth-base'].apply(this, arguments); };
     EditUriBackendConfig.parsers['onedrive'] = function () { return this['oauth-base'].apply(this, arguments); };

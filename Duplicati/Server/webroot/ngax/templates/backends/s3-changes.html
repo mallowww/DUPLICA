@@ -1,0 +1,62 @@
+<!-- ssl, checkbox -->
+<div ng-show="SupportsSSL" class="input checkbox">
+    <label for="s3_ssl" translate>Use SSL</label>
+    <input type="checkbox" style="width: 15px; margin-right: 65%;" name="s3_ssl" id="s3_ssl" ng-model="$parent.UseSSL"/>
+</div>
+
+<!-- input select-->
+<!-- s3.sran.net:9000 -->
+<div class="input select">
+
+    <label for="s3_server" translate>Server</label>
+    <!-- <select name="s3_server" id="s3_server" ng-model="$parent.s3_server"
+            ng-options="v as k + ' (' + v + ')' for (k, v) in s3_providers | orderBy: k"> 
+        <option value="" translate translate-params-server="s3_server_custom || ''">Custom server url ({{server}})
+        </option>
+    </select> -->
+
+    <input ng-hide="contains_value(s3_providers, s3_server)" type="text" id="s3_server_custom"
+           ng-model="$parent.s3_server_custom" value="s3.sran.net:9000" [readonly]="true" placeholder="{{'Fileman Endpoint' | translate}}"/>
+
+</div>
+
+<!-- input text -->
+<div class="input text">
+    <label for="s3_bucket" translate>Bucket name</label>
+    <input type="text" id="s3_bucket" ng-model="$parent.Server" placeholder="{{'Bucket name' | translate}}"/>
+</div>
+
+
+<!-- bucket create region-->
+
+<!-- storage class -->
+
+<div class="input text">
+    <label for="s3_path" translate>Folder path</label>
+    <input type="text" name="s3_path" id="s3_path" ng-model="$parent.Path"
+           placeholder="{{'Path or subfolder in the bucket' | translate}}"/>
+</div>
+
+<div class="input text">
+    <label for="s3_username" translate>Fileman Access ID</label>
+    <input type="text" name="s3_username" id="s3_username" ng-model="$parent.Username"
+           placeholder="{{'Fileman Access ID' | translate}}"/>
+</div>
+<div class="input password">
+    <label for="s3_password" translate>Fileman Access Key</label>
+    <input autocomplete="new-password" type="password" name="s3_password" id="s3_password" ng-model="$parent.Password"
+           placeholder="{{'Fileman Access Key' | translate}}"/>
+</div>
+
+<div class="input select">
+
+    <label for="s3_client" translate>Client library to use</label>
+
+    <select name="s3_client" id="s3_client" ng-model="$parent.s3_client"
+            ng-options="item as item.label for item in s3_client_options track by item.name"
+            title="{{'Some S3 providers might only be compatible with a certain client library' | translate}}">
+    </select>
+
+</div>
+
+<!-- generate IAM policy btn -->
